@@ -1,6 +1,6 @@
 # Microservice Architecture: Saga Orchestration Pattern
 
-![Arquitetura](Architecture/Proposed Architecture.png)
+![Architecture](Architecture/Proposed%20Architecture.png)
 
 ### Summary:
 
@@ -40,7 +40,7 @@
 
 # Proposed Architecture
 
-![Arquitetura](Architecture/Proposed Architecture.png)
+![Arquitetura](Architecture/Proposed%20Architecture.png)
 
 The architecture has 5 services:
 
