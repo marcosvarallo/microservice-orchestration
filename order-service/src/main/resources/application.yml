@@ -3,13 +3,14 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: ${KAKFA_BROKER:localhost:9092}
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
     topic:
       start-saga: start-saga
       notify-ending: notify-ending
     consumer:
       group-id: order-group
       auto-offset-reset: latest
+
   data:
     mongodb:
       database: admin
