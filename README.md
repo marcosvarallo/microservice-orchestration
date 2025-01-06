@@ -22,7 +22,7 @@
 
 ## Stack
 
-* **Java 17**
+* **Java 21**
 * **Spring Boot 3**
 * **Apache Kafka**
 * **API REST**
@@ -64,7 +64,7 @@ There are several ways to execute projects:
 To run the applications, you will need to have installed:
 
 * **Docker**
-* **Java 17**
+* **Java 21**
 * **Gradle 7.6 or higher**
 
 ### 01 - General execution via docker-compose
