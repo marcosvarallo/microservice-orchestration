@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator-service
+  labels:
+    app: orchestrator-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: orchestrator-service
+  template:
+    metadata:
+      labels:
+        app: orchestrator-service
+    spec:
+      containers:
+        - name: orchestrator-service
+          image: marcosvarallo/orchestrator-service:latest  # Substitua pelo seu Docker Hub
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka-service:9092"
+            - name: ORDER_SERVICE_URL
+              value: "http://order-service:3000"
+            - name: INVENTORY_SERVICE_URL
+              value: "http://inventory-service:8092"
+            - name: PAYMENT_SERVICE_URL
+              value: "http://payment-service:8091"
+            - name: PRODUCT_VALIDATION_SERVICE_URL
+              value: "http://product-validation-service:8090"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-service
+spec:
+  selector:
+    app: orchestrator-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP

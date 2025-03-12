@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-validation-service
+  labels:
+    app: product-validation-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-validation-service
+  template:
+    metadata:
+      labels:
+        app: product-validation-service
+    spec:
+      containers:
+        - name: product-validation-service
+          image: marcosvarallo/product-validation-service:latest
+          ports:
+            - containerPort: 8090
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka-service:9092"
+            - name: DB_HOST
+              value: "product-db"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "product-db"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "postgres"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-validation-service
+spec:
+  selector:
+    app: product-validation-service
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+  type: ClusterIP
